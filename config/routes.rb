@@ -1,5 +1,4 @@
 HackerNewsForPaddyPowers::Application.routes.draw do
-  get "items/create"
 
   resources :items, only: [:create, :destroy] do
     collection do

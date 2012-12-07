@@ -1,3 +1,16 @@
-// Place all the styles related to the Items controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+/* Styles in the Welcome page */
+.hero-unit{
+  h1 {font-size: 41px;margin-bottom: 30px;}
+}
+.main-button{
+  margin-left: 300px;
+  margin-top: 25px;
+}
+div.pull_HN_page{
+  background-image: url(/images/solid_@2X.png);
+  margin-top:40px;
+  h1{font-size:30px;text-align:center;margin-bottom:25px;margin-top:53px;}
+}
+.alert-error{margin-top: 50px;text-align:center;}

@@ -16,4 +16,4 @@ stories above the median.
 * Views and styles for a nice looking app have been created. I also used Bootstrap a little for quick styling.
 * I created a mailer to send the email with the calculated figures and the most interesting stories.
 * I have also added some tests (integration, controller and mailer tests). However, I did not complete the testing of the email sending, as my first attempt was not working correctly and I was running out of time. I also saw in the development log that the email is being sent correctly.
-* I have noticed that the servers hosting the Hacker News API are not stable. They response with "Runtime Error" quite often. Therefore I have dealt with that error in our application so that it shows a message to the user.
+* I have noticed that the call to the Hacker News API fails quite often (we get a "Runtime Error"). Therefore I have dealt with that error in our application so that it shows a message to the user.

@@ -1,0 +1,12 @@
+<div class="send_email">
+	<h3>Do you want to send these figures along with the most interesting stories to someone ?</h3>
+	<div class="span6 offset3">
+	   <%= form_tag('/items/send_HN_by_email') do %>
+	      <div class="email"> <%= text_field_tag :email, "Enter email here" %> </div>
+	      <%= hidden_field_tag 'mean', sprintf("%.2f", @mean_value) %>
+	      <%= hidden_field_tag 'median', @median_value %>
+	      <%= hidden_field_tag 'mode', @mode_value %>
+	      <%= submit_tag "Send email!", :class => "btn btn-large btn-primary" %>
+	   <% end %>
+    </div>	
+</div>

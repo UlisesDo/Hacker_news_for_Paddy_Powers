@@ -4,18 +4,18 @@ require 'httparty'
 require 'json'
 
 class ItemsController < ApplicationController
+  # We include the module where the methods to deal with the HN API are contained.
+  include Handleapi
+  
   def create
-    
+    # Not implemented for the moment, as we will not create Hacker news manually.
   end
   
-  def destroy
-    
+  # GET /items/welcome
+  def welcome  
   end
   
-  def welcome
-    
-  end
-  
+  # GET /items/pull_HN_front_page
   def pull_HN_front_page
     # When developing this, I could not get any response when calling the HN API with a nextId param. The server always
     # responded with a "Runtime error", so as those pages are not reliable, I decided that only the first page of 
@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     begin
       parsed_response = JSON.parse HTTParty.get('http://api.ihackernews.com/page').response.body
       @items = parsed_response["items"]
-      # We store the items received in the DB, for future reference or long-term figures / statistics
+      # We store the items received in the DB, in order to keep them and send them by email whenever we want
       @items.each do |item|
         unless Item.find_by_HN_id(item["id"])
           Item.create(:commentCount => item["commentCount"], :HN_id => item["id"], :points => item["points"], 
@@ -35,40 +35,27 @@ class ItemsController < ApplicationController
       @mean_value = calculate_mean_for_HN_items(@points_array)
       @median_value = calculate_median_for_HN_items(@points_array)
       @mode_value = calculate_mode_for_HN_items(@points_array)
-      
-      
-      
+    
     rescue Exception => e
       flash[:error] = "We are sorry, but the Hacker News API is not responding at the moment. Please, try again."
       redirect_to root_path
     end  
+  end
+  
+  # POST /items/send_HN_by_email
+  def send_HN_by_email
+    @email_address = params[:email]
+    @mean_value = params[:mean].to_f
+    @median_value = params[:median].to_i
+    @mode_value = params[:mode].to_i
+    @items_to_send = Item.where("points > ?", @median_value)
     
- 
-  end
-  
-  
-  private
-  
-  def get_array_with_points(items)
-    points_array = items.collect do |item|
-                      item.values[4]
-                   end
-    return points_array
-  end
-  
-  def calculate_mean_for_HN_items(points_array)
-    return points_array.inject{ |sum, element| sum + element }.to_f / points_array.size
-  end
-  
-  def calculate_median_for_HN_items(points_array)
-    sorted = points_array.sort
-    mid = points_array.size/2
-    sorted[mid]
-  end
-  
-  def calculate_mode_for_HN_items(points_array)
-    freq = points_array.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
-    points_array.sort_by { |v| freq[v] }.last
+    ItemMailer.send_hacker_news_email(@items_to_send, @email_address, @mean_value, @median_value, @mode_value).deliver
+    
+    # Once we have sent the email with the stories and their figures, we delete all those stories from our DB, to
+    # leave it clear and ready for the next pull. I decided this, as there is no requirement to keep the stories nor
+    # to do anything with them in the future. We are interested in the CURRENT stories only.
+    Item.all.each { |item| item.destroy }
   end
   
 end

@@ -1,0 +1,16 @@
+Hello! Please, find below the most interesting stories of today:
+================================================================
+
+These are the statistics scores for this set of Hacker News:
+
+Mean: <%= sprintf("%.2f", @mean_value) %>
+Median: <%= @median_value %>
+Mode: <%= @mode_value %>
+
+And below you can find the most interesting stories, with more points than the median:
+
+Title  -  URL  -  Hacker News Id  -  Number of comments  -  Points  -  Posted ago  -  Posted By
+===============================================================================================
+<% @items_to_send.each do |item| %>
+	<%= item["title"] %>  -  <%= item["url"] %>  -  <%= item["id"] %>  -  <%= item["commentCount"] %>  -  <%= item["points"] %>  -  <%= item["postedAgo"] %>  -  <%= item["postedBy"] %>
+<% end %>

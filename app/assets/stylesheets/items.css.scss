@@ -8,6 +8,10 @@
   margin-left: 300px;
   margin-top: 25px;
 }
+.alert-error{margin-top: 50px;text-align:center;}
+
+/* Styles in the pull_HN_front_page */
+
 div.pull_HN_page{
   margin-top:40px;
   h1{font-size:30px;text-align:center;margin-bottom:25px;margin-top:53px;}
@@ -24,13 +28,15 @@ div.pull_HN_page{
       padding-top: 17px;
     }
   }
+  div.send_email{
+    margin-bottom: 20px;
+    div.email{height: 20px;margin-top: 6px;float: left;margin-right: 21px;}
+  }
 }
-.alert-error{margin-top: 50px;text-align:center;}
-
-/* Styles in the pull_HN_front_page */
 
 table{
   background-image: url(solid.png);
+  margin-bottom:20px;
   tr{
     border: 2px solid #fafafa;
     -webkit-border-radius: 5px; /* Safari and webkit  */  

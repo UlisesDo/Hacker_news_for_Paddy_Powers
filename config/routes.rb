@@ -1,8 +1,9 @@
 HackerNewsForPaddyPowers::Application.routes.draw do
 
-  resources :items, only: [:create, :destroy] do
+  resources :items, only: [:create] do
     collection do
       get :welcome, :pull_HN_front_page
+      post :send_HN_by_email
     end
   end
   

@@ -1,9 +1,36 @@
 <div class="pull_HN_page">
-
-	<h1>These are the Hacker News currently on the front page</h1>
-	
+	<h1>Hacker News currently on the front page</h1>
+	<div class="figures">
+		<h3>These are the statistics scores for this set of Hacker News:</h3>
+		<div class="value">Mean: <%= sprintf("%.2f", @mean_value) %></div>
+		<div class="value">Median: <%= @median_value %></div>
+		<div class="value">Mode: <%= @mode_value %></div>
+	</div>	
+	<table>
+	  <tr class="header">
+	    <th>Title</th>
+	    <th>URL</th>
+	    <th>Hacker News Id</th>
+	    <th>Number of comments</th>
+	    <th>Points</th>
+	    <th>Posted ago</th>
+	    <th>Posted By</th>
+	  </tr>
+	 
 	<% @items.each do |item| %>
-		<%= item %><br />
+	  <% if item["points"] > @mean_value %>
+	  	<tr class="interesting">
+	  <% else %>
+	  	<tr>
+	  <% end %>		
+	    <td><%= item["title"] %></td>
+	    <td><%= item["url"] %></td>
+	    <td><%= item["id"] %></td>
+	    <td><%= item["commentCount"] %></td>
+	    <td class="points"><%= item["points"] %></td>
+	    <td><%= item["postedAgo"] %></td>
+	    <td><%= item["postedBy"] %></td>
+	  </tr>
 	<% end %>
-	
+	</table>
 </div>

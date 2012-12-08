@@ -9,8 +9,43 @@
   margin-top: 25px;
 }
 div.pull_HN_page{
-  background-image: url(/images/solid_@2X.png);
   margin-top:40px;
   h1{font-size:30px;text-align:center;margin-bottom:25px;margin-top:53px;}
+  div.figures{
+    div.value{
+      background: url(green_button_invite.png) repeat-x;
+      float: left;
+      width: 313px;
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      height: 33px;
+      padding-top: 17px;
+    }
+  }
 }
 .alert-error{margin-top: 50px;text-align:center;}
+
+/* Styles in the pull_HN_front_page */
+
+table{
+  background-image: url(solid.png);
+  tr{
+    border: 2px solid #fafafa;
+    -webkit-border-radius: 5px; /* Safari and webkit  */  
+    border-radius: 5px; /* Opera, Chrome */ 
+    -moz-border-radius: 5px; /* Mozilla (FF, Seamonkey) */
+  }
+  tr.header{
+      font-size:13px;
+      color:white;
+      background-image: url(blackmamba.png);
+  }
+  tr.interesting{
+    background-image: url(lgren027.gif);
+    font-weight:bold;
+    td.points{font-size:18px;}
+  }  
+  td{text-align:center;}
+}
